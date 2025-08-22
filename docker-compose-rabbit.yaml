@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  rabbitmq:
+    container_name: rabbitmq
+    image: 'rabbitmq:4-management-alpine'
+    ports:
+      - '4369:4369'
+      - '5672:5672'
+      - '15672:15672'
+      - '15674:15674'
+      - '15675:15675'
+      - '25672:25672'
+      - '1883:1883'
+      - '8883:8883'
+    restart: always
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbitmq
+      - RABBITMQ_DEFAULT_PASS=PASS@12345
+    command: >
+      sh -c "rabbitmq-plugins enable --offline rabbitmq_management rabbitmq_mqtt rabbitmq_web_mqtt rabbitmq_web_stomp && rabbitmq-server"
+
+volumes:
+  rabbitmq_data:
