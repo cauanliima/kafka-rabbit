@@ -10,3 +10,6 @@ source kafka-env/bin/activate
 
 # Instale as bibliotecas
 pip install -r requirements.txt
+
+# Execute os scripts
+python3 kafka_receive.py
